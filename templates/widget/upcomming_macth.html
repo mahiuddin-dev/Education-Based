@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="widget upcomming_macth mb30">
+    <div class="row">
+      <div class="col-8 align-self-center">
+        <h2 class="widget-title">Latest Jobs </h2>
+      </div>
+    </div>
+
+    {% for TrandingPost in Jobpost %}
+    <div class="single_post type10 widgets_small mb15">
+      <div class="post_img">
+        <div class="img_wrap shikbosobbai">
+          <a href="{{ TrandingPost.get_absolute_url }}">
+            <img
+              src="{{ TrandingPost.image.url }}"
+              alt="{{ TrandingPost.title }}"
+            />
+          </a>
+        </div>
+        <span class="tranding tranding_border"> {{ forloop.counter }} </span>
+      </div>
+      <div class="single_post_text">
+        <h4>
+          <a href="{{ TrandingPost.get_absolute_url }}">
+            {{ TrandingPost.title | slice:"0:40"}}..</a>
+        </h4>
+        <div class="meta4"><a style="text-transform: uppercase;" href="{{ TrandingPost.category.get_absolute_url }}">{{ TrandingPost.category }}</a></div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>

@@ -1,0 +1,533 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<style>
+	.post_img.gradient1.image_slider img {
+		height: 488px;
+	}
+	.single_gallary_item img {
+		height: 70px;
+		width: 100%;
+	}
+	.owl-carousel .owl-item img {
+		display: inline-block;
+		width: 100%;
+		height: 250px;
+	  }
+	.single_post.widgets_small img {
+		width: 100%;
+		height: 70px;
+	  }
+	  .img_wrap.video_img img {
+		width: 100%;
+		height: 440px;
+	  }
+	  .img_wrap.video_img {
+		width: 100%;
+		height: auto;
+	  }
+	  .img_wrap.video_img a {
+		width: 100%;
+	  }
+	  .img_wrap.mix_carousel_img {
+		width: 100%;
+		height: auto;
+	  }
+	  .img_wrap.mix_carousel_img a {
+		width: 100%;
+	  }
+	  .img_wrap.mix_carousel_img a img{
+		height: 350px;
+	  }
+	  .img_wrap.LatestNews {
+		width: 100%;
+	  }
+	  .img_wrap.LatestNews a {
+		width: 100%;
+	  }
+	  .img_wrap.fifth_bg_image {
+		width: 100%;
+	  }
+	  .img_wrap.fifth_bg_image a {
+		width: 100%;
+	  }
+	  @media screen and (min-width: 992px) {
+		.post_img img {
+		  height: 250px;
+		}
+	  }
+	  @media screen and (min-width: 1400px) {
+		.post_img img {
+		  height: 280px;
+		}
+	  }
+	  @media screen and (min-width: 1600px) {
+		.post_img img {
+		  height: 300px;
+		}
+	  }
+	  @media screen and (min-width: 1900px) {
+		.post_img img {
+		  height: 325px;
+		}
+	  }
+	  
+</style>
+{% endblock style %}
+
+
+{% block body %}
+    <!-- POST CAROUSEL AREA START  -->
+    <div class="fifth_bg">
+		<div class="container">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="carousel_posts1 owl-carousel nav_style2 mb40 mt30">
+				
+				{% for post in blogs %} 
+			
+
+				<div class="single_post widgets_small post_type5">
+					<div class="post_img">
+						<div class="img_wrap fifth_bg_image">
+							<a href="{{ post.get_absolute_url }}">
+								<img src="{{ post.image.url }}" alt="{{ post.title }}">
+							</a>
+						</div>
+					</div>
+					<div class="single_post_text">
+						<h4><a href="{{ post.get_absolute_url }}"> {{ post.title|slice:"0:55" }} …</a></h4>
+						<p>{{ post.body|safe |slice:"0:25" }}</p>
+					</div>
+				</div>  
+			
+				{% endfor %}
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<!-- POST CAREOUSEL AREA END -->
+  
+	<!-- POST GALLARY AREA START -->
+	  <div class="post_gallary_area fifth_bg mb40">
+		<div class="container">
+		  <div class="row">
+			<div class="col-lg-12">
+			  <div class="row">
+
+				<div class="col-xl-8">
+					<div class="slider_demo2">
+
+						{% for home_slide in home_slider %}
+						<div class="single_post post_type6 xs-mb30">
+							<div class="post_img gradient1 image_slider">
+								<img src="{{ home_slide.image.url }}" alt="{{ home_slide.title }}">	
+								
+								<!-- <span class="tranding">
+									<i class="fas fa-play"></i>
+								</span> -->
+
+							</div>
+							<div class="single_post_text">
+								<div class="meta meta_separator1">
+									<a href="{{ home_slide.category.get_absolute_url }}">{{ home_slide.category }}</a>
+									<span>/</span>
+									<span>{{ home_slide.date }}</span>
+								</div>
+								<h4><a href="{{ home_slide.get_absolute_url }}">{{ home_slide.title|slice:"0:70" }}</a></h4>
+								<div class="space-10"></div>
+								<p class="post-p">{{ home_slide.body|safe|slice:"0:120" }}…</p>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+
+					<div class="slider_demo1">
+						{% for home_slide_photo in home_slider %}
+						<div class="single_gallary_item">
+							<img src="{{ home_slide_photo.image.url }}" alt="{{ home_slide_photo.title }}">
+						</div>
+						{% endfor %}
+					</div>
+
+				</div>
+
+				<div class="col-xl-4"> 
+					<!-- widget/ReletedWidget.html -->
+					{% include "widget/ReletedWidget.html" %}
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <!-- POST GALLARY AREA END -->
+  
+	  <!-- FEATURE_POST AREA START -->
+	  <div class="feature_carousel_area mb40">
+		<div class="container">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="heading">
+				<h2 class="widget-title">Feature</h2>
+			  </div>
+			</div>
+		  </div>
+		  <div class="row">
+			<div class="col-12">
+			  <div class="feature_carousel owl-carousel nav_style1">
+				<!--CAROUSEL START-->
+				{% for feature_news in feature_news %}
+
+				<div class="single_post post_type6 post_type7">
+				  <div class="post_img gradient1">
+					<a href="{{ feature_news.get_absolute_url }}">
+					  <img
+						src="{{ feature_news.image.url }}"
+						alt="{{ feature_news.title }}"
+					  />
+					</a>
+				  </div>
+				  <div class="single_post_text">
+					<div class="meta5">
+					  <a href="{{ feature_news.category.get_absolute_url }}">{{ feature_news.category }}</a>
+					  <a href="{{ feature_news.get_absolute_url }}">{{ feature_news.date }}</a>
+					</div>
+					<h4>
+					  <a href="{{ feature_news.get_absolute_url }}"
+						>{{ feature_news.title|slice:"0:50" }}</a
+					  >
+					</h4>
+				  </div>
+				</div>
+				{% endfor %}
+				<!--CAROUSEL END-->
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <!-- FEATURE POST AREA END -->
+	  <!-- TRANDING CAROUSEL AREA START -->
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-6 col-lg-8">
+			<h2 class="widget-title">Trending</h2>
+			<div class="carousel_post2_type3 nav_style1 owl-carousel">
+			  <!--CAROUSEL START-->
+			  {% for tranding in Tranding %}
+			  <div class="single_post post_type3">
+				<div class="post_img">
+				  <div class="img_wrap">
+					<img
+					  src="{{ tranding.image.url }}"
+					  alt="{{ tranding.title }}"
+					/>
+				  </div>
+				  <span class="tranding">
+					<i class="fas fa-bolt"></i>
+				  </span>
+				</div>
+				<div class="single_post_text">
+				  <div class="meta3">
+					<a href="{{ tranding.category.get_absolute_url }}">{{ tranding.category }}</a>
+					<a href="{{ tranding.get_absolute_url }}">{{ tranding.date }}</a>
+				  </div>
+				  <h4>
+					<a href="{{ tranding.get_absolute_url }}"
+					  >{{ tranding.title|slice:"0:50" }}..</a
+					>
+				  </h4>
+				  <div class="space-10"></div>
+				  <p class="post-p">
+					{{ tranding.body|safe |slice:"0:120" }}…
+				  </p>
+				</div>
+			  </div>
+			  {% endfor %}
+			</div>
+			<div class="border_black"></div>
+			<div class="space-30"></div>
+			<div class="row">
+			  <div class="col-lg-6">
+
+				{% for Latest in Latest %}
+				{% if forloop.counter > 2 %}				
+				<div class="single_post widgets_small">
+				  <div class="post_img">
+					<div class="img_wrap">
+					  <img
+						src="{{ Latest.image.url }}"
+						alt="{{ Latest.title }}"
+					  />
+					</div>
+					<span class="tranding">
+					  <i class="fas fa-bolt"></i>
+					</span>
+				  </div>
+				  <div class="single_post_text">
+					<div class="meta2">
+					  <a href="{{ Latest.category.get_absolute_url }}">{{ Latest.category }}</a>
+					  <a href="{{ Latest.get_absolute_url }}">{{ Latest.date|date:"M d, Y"  }}</a>
+					</div>
+					<h4>
+					  <a href="{{ Latest.get_absolute_url }}"
+						>{{ Latest.title|slice:"0:40" }}</a
+					  >
+					</h4>
+				  </div>
+				</div>
+				<div class="space-15"></div>
+				<div class="border_black"></div>
+				<div class="space-15"></div>
+				{% endif %}
+				{% endfor %}
+			  </div>
+			  <div class="col-lg-6">
+
+				{% for Latest in Tranding %}
+				{% if forloop.counter > 2 %}				
+				<div class="single_post widgets_small">
+				  <div class="post_img">
+					<div class="img_wrap">
+					  <img
+						src="{{ Latest.image.url }}"
+						alt="{{ Latest.title }}"
+					  />
+					</div>
+					<span class="tranding">
+					  <i class="fas fa-bolt"></i>
+					</span>
+				  </div>
+				  <div class="single_post_text">
+					<div class="meta2">
+					  <a href="{{ Latest.category.get_absolute_url }}">{{ Latest.category }}</a>
+					  <a href="{{ Latest.get_absolute_url }}">{{ Latest.date|date:"M d, Y"  }}</a>
+					</div>
+					<h4>
+					  <a href="{{ Latest.get_absolute_url }}"
+						>{{ Latest.title|slice:"0:40" }}</a
+					  >
+					</h4>
+				  </div>
+				</div>
+				<div class="space-15"></div>
+				<div class="border_black"></div>
+				<div class="space-15"></div>
+				{% endif %}
+				{% endfor %}
+			  </div>
+
+			</div>
+		  </div>
+		  <div class="col-md-12 col-lg-4">
+	
+			<!-- widget/NewsLetter.html -->
+			{% include "widget/NewsLetter.html" %}
+			<!-- widget/FollowUs.html -->
+			{% include "widget/FollowUs.html" %}
+			<!-- widget/banner300.html -->
+			{% include "widget/banner300.html" %}
+
+		  </div>
+		</div>
+	  </div>
+	  <!-- TRANDING CAROUSEL AREA END -->
+	  <!-- MIX CAROUSEL AREA START -->
+	  <div class="half_bg1 mix_area">
+		<div class="container">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="mix_carousel">
+				<!--CAROUSEL START-->
+				<div class="single_mix_carousel owl-carousel nav_style3">
+
+				{% for mix_slider in home_slider %}
+				{% if forloop.counter > 5%}
+				
+				  <div class="single_post post_type6 post_type9">
+					<div class="post_img gradient1">
+					  <div class="img_wrap mix_carousel_img">
+						<a href="{{ mix_slider.get_absolute_url }}">
+						  <img src="{{ mix_slider.image.url }}" alt="{{ mix_slider.title }}" />
+						</a>
+					  </div>
+
+					</div>
+					<div class="single_post_text">
+					  <div class="meta">
+						<a href="{{ mix_slider.category.get_absolute_url }}">{{ mix_slider.category }}</a>
+						<a href="{{ mix_slider.get_absolute_url }}">{{ mix_slider.date|date:"M d, Y" }}</a>
+					  </div>
+					  <h4>
+						<a href="{{ mix_slider.get_absolute_url }}"
+						  >{{ mix_slider.title|slice:"0:50" }}</a
+						>
+					  </h4>
+					</div>
+				  </div>
+				  {% endif %}
+				  {% endfor %}
+
+				</div>
+			  </div>
+			  <!--CAROUSEL END-->
+			</div>
+		  </div>
+		</div>
+		<div class="space-60"></div>
+	  </div>
+	  <!-- MIX CAROUSEL AREA END -->
+  
+	  <!-- VIDEO POST AREA START -->
+	  <div class="video_posts pt30 half_bg60">
+		<div class="container">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="heading white">
+				<h2 class="widget-title">New Post</h2>
+			  </div>
+			</div>
+		  </div>
+		  <div class="space-50"></div>
+		  <div class="viceo_posts_wrap">
+			<div class="row">
+
+			  <div class="col-lg-8">
+				{% for latest in Latest %}
+				{% if forloop.counter == 1%}
+				<div class="single_post post_type3 post_type11 margintop-60- xs-mb30"
+				>
+				  <div class="post_img">
+					<div class="img_wrap video_img">
+					  <a href="{{ latest.get_absolute_url }}">
+						<img src="{{ latest.image.url }}" alt="{{ latest.title }}" />
+					  </a>
+					</div>
+				  </div>
+				  <div class="single_post_text padding30 fourth_bg">
+					<div class="meta3">
+					  <a href="{{ latest.category.get_absolute_url }}">{{ latest.category }}</a>
+					  <a href="{{ latest.get_absolute_url }}">{{ latest.date|date:"M d, Y"  }}</a>
+					</div>
+					<h4>
+					  <a href="{{ latest.get_absolute_url }}"
+						>{{ latest.title|slice:"0:50" }}</a
+					  >
+					</h4>
+				  </div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			  </div>
+
+			  <div class="col-lg-4">
+				<!-- widget/PopularPosts.html -->
+				{% include "widget/PopularPosts.html" %}
+			  </div>
+
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <!-- VIDEO POST AREA END -->
+
+	  <!-- ENTERTAINMENT AREA START -->
+	  <div class="entertrainments pt30">
+		<div class="container">
+		  <div class="row">
+
+			<div class="col-lg-8">
+
+			  <!-- widget/bannerAds.html -->
+			  {% include "widget/bannerAds.html" %}
+			  
+			  <div class="row">
+				<div class="col-12">
+				  <div class="businerss_news">
+					<div class="row">
+					  <div class="col-6 align-self-center">
+						<h2 class="widget-title">latest News</h2>
+					  </div>
+					  <div class="col-6 text-right align-self-center">
+						<a href="{% url 'Blog:Blog' %}" class="see_all mb20">See All</a>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-12">
+						 {% for Latest in Latest %}
+						<div class="single_post post_type3 post_type12 mb30">
+						  <div class="post_img ">
+							<div class="img_wrap LatestNews">
+							  <a href="{{ Latest.get_absolute_url }}">
+								<img
+								  src="{{ Latest.image.url }}"
+								  alt="{{ Latest.title }}"
+								/>
+							  </a>
+							</div>
+						  </div>
+						  <div class="single_post_text">
+							<div class="meta3">
+							  <a href="{{ Latest.category.get_absolute_url }}">{{ Latest.category }}</a>
+							  <a href="{{ Latest.get_absolute_url }}">{{ Latest.date|date:"M d, Y" }}</a>
+							</div>
+							<h4>
+							  <a href="{{ Latest.get_absolute_url }}">{{ Latest.title|slice:"0:50" }}</a>
+								
+							</h4>
+							<div class="space-10"></div>
+							<p class="post-p">
+							  {{ Latest.body|safe |slice:"0:120" }}…
+							</p>
+							<div class="space-20"></div>
+							<a href="{{ Latest.get_absolute_url }}" class="readmore">Read more</a>
+						  </div>
+						</div>
+
+						
+						{% endfor %} 
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+
+			</div>
+
+			<div class="col-lg-4">
+			  <div class="row">
+				
+				<div class="col-lg-6 col-lg-12">
+					<!-- upcomming_macth -->
+					{% include "widget/upcomming_macth.html" %}
+				</div>
+
+				<div class="col-lg-6 col-lg-12">
+					<!-- widget/NewsLetter.html -->
+					{% include "widget/NewsLetter.html" %}
+				</div>
+				
+				<div class="col-lg-6 col-lg-12">
+					<!-- widget/Categories.html -->
+					{% include "widget/Categories.html" %}
+				</div>
+
+				<div class="col-lg-6 col-lg-12">
+					<!-- banner300.html -->
+					{% include "widget/banner300.html" %}
+				</div>
+				<div class="col-lg-6 col-lg-12">
+					<!-- PopularPosts.html -->
+					{% include "widget/PopularPosts.html" %}
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <!-- ENTERTAINMENT AREA END -->
+{% endblock body %}

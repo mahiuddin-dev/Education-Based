@@ -1,0 +1,999 @@
+/*
+ * Stellarnav.js 2.5.0
+ * Responsive, lightweight, multi-level dropdown menu.
+ * Copyright (c) 2018 Vinny Moreira - http://vinnymoreira.com
+ * Released under the MIT license
+ */
+/* all nav */
+
+.stellarnav {
+    position: relative;
+    width: auto;
+    z-index: 99;
+    line-height: normal;
+}
+
+.stellarnav a {
+    color: #777;
+}
+
+.stellarnav ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.stellarnav li {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.stellarnav li a {
+    padding: 13px 22px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    box-sizing: border-box;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.stellarnav li li a {
+    padding: 8px 23px;
+}
+
+/* main level */
+.stellarnav > ul > li {
+    display: inline-block;
+}
+
+/* first level dd */
+.stellarnav ul ul {
+    top: auto;
+    width: 220px;
+    position: absolute;
+    z-index: 9900;
+    text-align: left;
+    display: none;
+    background: #ddd;
+}
+
+.stellarnav li li {
+    display: block;
+}
+
+/* second level dd */
+.stellarnav ul ul ul {
+    top: 0;
+    /* dd animtion - change to auto to remove */
+    left: 220px;
+}
+
+.stellarnav > ul > li:hover > ul > li:hover > ul {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+}
+
+/* .drop-left */
+.stellarnav > ul > li.drop-left > ul {
+    right: 0;
+}
+
+.stellarnav li.drop-left ul ul {
+    left: auto;
+    right: 220px;
+}
+
+/* light theme */
+.stellarnav.light {
+    background: transparent;
+}
+
+
+.stellarnav.light ul ul {
+    background: rgba(255, 255, 255, 1);
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* dark theme */
+.stellarnav.dark {
+    background: rgba(0, 0, 0, 1);
+}
+
+.stellarnav.dark a {
+    color: #FFF;
+}
+
+.stellarnav.dark ul ul {
+    background: rgba(0, 0, 0, 1);
+}
+
+.stellarnav.dark li a {
+    color: #FFF;
+}
+
+/* sticky nav */
+.stellarnav.fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+/* only used when 'scrollbarFix' is set to true in the js. This fixes horizontal scrollbar caused by the dd menus that are very long.*/
+body.stellarnav-noscroll-x {
+    overflow-x: hidden;
+}
+
+/* general styling */
+.stellarnav li.has-sub > a:after {
+    content: '';
+    margin-left: 10px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #FFF;
+    display: none;
+}
+
+.stellarnav li li.has-sub > a:after {
+    margin-left: 10px;
+    float: right;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #FFF;
+    position: relative;
+    top: 4px;
+}
+
+.stellarnav li.drop-left li.has-sub > a:after {
+    float: left;
+    margin-right: 10px;
+    border-left: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid #FFF;
+}
+
+.stellarnav.hide-arrows li.has-sub > a:after,
+.stellarnav.hide-arrows li li.has-sub > a:after,
+.stellarnav.hide-arrows li.drop-left li.has-sub > a:after {
+    display: none;
+}
+
+.stellarnav .menu-toggle,
+.stellarnav .close-menu,
+.stellarnav .call-btn-mobile,
+.stellarnav .location-btn-mobile {
+    display: none;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.stellarnav .dd-toggle {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    z-index: 9999;
+    border: 0;
+}
+.dark-theme .stellarnav.light .menu-toggle span.bars span, 
+.theme-3 .stellarnav.light .menu-toggle span.bars span {
+    background: #9199A0;
+}
+.stellarnav.desktop li.has-sub a {
+    padding-right: 5px;
+}
+
+.stellarnav.desktop.hide-arrows li.has-sub a {
+    padding-right: 15px;
+}
+
+.stellarnav.mobile > ul > li > a.dd-toggle {
+    padding: 0;
+}
+
+.stellarnav li.call-btn-mobile,
+.stellarnav li.location-btn-mobile {
+    display: none;
+}
+
+/* svg icons */
+.stellarnav svg {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 2px;
+}
+
+/* svg icons */
+
+.stellarnav a.dd-toggle .icon-plus {
+    box-sizing: border-box;
+    transition: transform 0.3s;
+    width: 12px;
+    height: 100%;
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.stellarnav a.dd-toggle .icon-plus:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 0px;
+    border-bottom: solid 2px #777;
+    position: absolute;
+    top: 50%;
+    transform: rotate(90deg);
+    transition: width 0.3s;
+}
+
+.stellarnav a.dd-toggle .icon-plus:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 0px;
+    top: 50%;
+    border-bottom: solid 2px #777;
+    position: absolute;
+}
+
+.dark-theme .stellarnav.mobile a.dd-toggle .icon-plus:after, 
+.dark-theme .stellarnav.mobile a.dd-toggle .icon-plus:before,
+.theme-3 .stellarnav.mobile a.dd-toggle .icon-plus:after, 
+.theme-3 .stellarnav.mobile a.dd-toggle .icon-plus:before 
+{
+    border-color: #fff;
+}
+.dark-theme a.close-menu.full, 
+.theme-3 a.close-menu.full {
+    color: #fff;
+}
+
+.stellarnav li.open > a.dd-toggle .icon-plus {
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+.stellarnav.light a.dd-toggle .icon-plus:before {
+    border-color: #000;
+}
+
+.theme-4 .stellarnav.light a.dd-toggle .icon-plus:after {
+    border-color: #fff;
+}
+
+.theme-4 .stellarnav.light a.dd-toggle .icon-plus:before {
+    border-color: #fff;
+}
+
+.theme-4 .newsprk_nav li a:before{
+    display: none;
+}
+.theme-4 a.close-menu.full{
+    color: #fff;
+}
+
+.theme-4 .stellarnav.light .menu-toggle span.bars span{
+    background: #fff;
+}
+
+
+
+.stellarnav.light a.dd-toggle .icon-plus:after {
+    border-color: #000;
+}
+
+
+
+
+.stellarnav.dark a.dd-toggle .icon-plus:before {
+    border-color: #FFF;
+}
+
+.stellarnav.dark a.dd-toggle .icon-plus:after {
+    border-color: #FFF;
+}
+
+.stellarnav .icon-close {
+    box-sizing: border-box;
+    width: 12px;
+    height: 12px;
+    position: relative;
+    display: inline-block;
+    display: none;
+}
+
+.stellarnav .icon-close:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 0px;
+    border-bottom: solid 3px #777;
+    position: absolute;
+    top: 50%;
+    transform: rotate(45deg);
+}
+
+.stellarnav .icon-close:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 0px;
+    top: 50%;
+    border-bottom: solid 3px #777;
+    position: absolute;
+    transform: rotate(-45deg);
+}
+
+.stellarnav.light .icon-close:before {
+    border-color: #444;
+}
+
+.stellarnav.light .icon-close:after {
+    border-color: #444;
+}
+
+.stellarnav.dark .icon-close:before {
+    border-color: #FFF;
+}
+
+.stellarnav.dark .icon-close:after {
+    border-color: #FFF;
+}
+
+/* mobile nav */
+.stellarnav .menu-toggle,
+.stellarnav .call-btn-mobile,
+.stellarnav .location-btn-mobile,
+.stellarnav .close-menu {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.stellarnav .menu-toggle span.bars {
+    display: inline-block;
+    margin-right: 7px;
+    position: relative;
+    top: 3px;
+}
+
+.stellarnav .menu-toggle span.bars span {
+    display: block;
+    width: 15px;
+    height: 2px;
+    border-radius: 6px;
+    background: #444;
+    margin: 0 0 3px;
+}
+
+.stellarnav .full {
+    width: 100%;
+}
+
+.stellarnav .half {
+    width: 50%;
+}
+
+.stellarnav .third {
+    width: 33%;
+    text-align: center;
+}
+
+.stellarnav .location-btn-mobile.third {
+    text-align: center;
+}
+
+.stellarnav .location-btn-mobile.half {
+    text-align: right;
+}
+
+.stellarnav.light .third,
+.stellarnav.light .half {
+    border-left: 1px solid rgba(0, 0, 0, .15);
+}
+
+.stellarnav.light.left .third,
+.stellarnav.light.left .half {
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.stellarnav.light.right .third,
+.stellarnav.light.right .half {
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.stellarnav.light .third:first-child,
+.stellarnav.light .half:first-child {
+    border-left: 0;
+}
+
+.stellarnav.dark .third,
+.stellarnav.dark .half {
+    border-left: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stellarnav.dark.left .third,
+.stellarnav.dark.left .half {
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stellarnav.dark.right .third,
+.stellarnav.dark.right .half {
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stellarnav.light.left .menu-toggle,
+.stellarnav.light.right .menu-toggle {
+    border-bottom: 0;
+}
+
+.stellarnav.dark.left .menu-toggle,
+.stellarnav.dark.right .menu-toggle {
+    border-bottom: 0;
+}
+
+.stellarnav.dark .third:first-child,
+.stellarnav.dark .half:first-child {
+    border-left: 0;
+}
+
+.stellarnav.light .menu-toggle span.bars span {
+    background: #444;
+}
+
+.stellarnav.dark .menu-toggle span.bars span {
+    background: #FFF;
+}
+
+.stellarnav.mobile {
+    position: static;
+}
+
+.stellarnav.mobile.fixed {
+    position: static;
+}
+
+.stellarnav.mobile ul {
+    position: relative;
+    display: none;
+}
+
+.stellarnav.mobile.active {
+    padding-bottom: 0;
+}
+
+.stellarnav.mobile.active > ul {
+    display: block;
+}
+
+.stellarnav.mobile ul {
+    text-align: left;
+}
+
+.stellarnav.mobile > ul > li {
+    display: block;
+}
+
+.stellarnav.mobile > ul > li > a {
+    padding: 15px;
+}
+
+.stellarnav.mobile ul {
+    background: rgba(221, 221, 221, 1);
+}
+
+.stellarnav.mobile ul ul {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    width: auto;
+    display: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none;
+}
+
+.stellarnav.mobile ul ul ul {
+    left: auto;
+    top: auto;
+}
+
+.stellarnav.mobile li.drop-left ul ul {
+    right: auto;
+}
+
+.stellarnav.mobile li a {
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stellarnav.mobile > ul {
+    border-top: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stellarnav.mobile.light li a {
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.stellarnav.mobile.light > ul {
+    border-top: 1px solid rgba(0, 0, 0, .15);
+}
+
+.stellarnav.mobile li a.dd-toggle {
+    border: 0;
+}
+
+.stellarnav.mobile.light li a.dd-toggle {
+    border: 0;
+}
+
+.stellarnav.mobile .menu-toggle,
+.stellarnav.mobile .dd-toggle,
+.stellarnav.mobile .close-menu,
+.stellarnav.mobile .call-btn-mobile,
+.stellarnav.mobile .location-btn-mobile {
+    display: inline-block;
+}
+
+.stellarnav.mobile li.call-btn-mobile {
+    border-right: 1px solid rgba(255, 255, 255, .1);
+    box-sizing: border-box;
+}
+
+.stellarnav.mobile li.call-btn-mobile,
+.stellarnav.mobile li.location-btn-mobile {
+    display: inline-block;
+    width: 50%;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.stellarnav.mobile li.call-btn-mobile.full,
+.stellarnav.mobile li.location-btn-mobile.full {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    border-right: 0;
+    text-align: left;
+}
+
+.stellarnav.mobile.light ul {
+    background: rgba(255, 255, 255, 1);
+}
+
+.stellarnav.mobile.dark ul {
+    background: rgba(0, 0, 0, 1);
+}
+
+.stellarnav.mobile.dark ul ul {
+    background: rgba(255, 255, 255, .08);
+}
+
+.stellarnav.mobile.light li.call-btn-mobile {
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+.stellarnav.mobile.top {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.stellarnav.mobile li.has-sub > a:after,
+.stellarnav.mobile li li.has-sub > a:after,
+.stellarnav.mobile li.drop-left li.has-sub > a:after {
+    display: none;
+}
+
+/* left and right positions */
+.stellarnav.mobile.right > ul,
+.stellarnav.mobile.left > ul {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 280px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.stellarnav.mobile.right > ul {
+    right: 0;
+}
+
+.stellarnav.mobile.right .close-menu,
+.stellarnav.mobile.left .close-menu {
+    display: inline-block;
+    text-align: right;
+}
+
+.stellarnav.mobile.left > ul {
+    left: 0;
+}
+
+.stellarnav.mobile.right .location-btn-mobile.half,
+.stellarnav.mobile.right .call-btn-mobile.half,
+.stellarnav.mobile.right .close-menu.half {
+    text-align: center;
+}
+
+.stellarnav.mobile.right .location-btn-mobile.third,
+.stellarnav.mobile.right .call-btn-mobile.third,
+.stellarnav.mobile.right .close-menu.third {
+    text-align: center;
+}
+
+.stellarnav.mobile.left .location-btn-mobile.half,
+.stellarnav.mobile.left .call-btn-mobile.half,
+.stellarnav.mobile.left .close-menu.half {
+    text-align: center;
+}
+
+.stellarnav.mobile.left .location-btn-mobile.third,
+.stellarnav.mobile.left .call-btn-mobile.third,
+.stellarnav.mobile.left .close-menu.third {
+    text-align: center;
+}
+
+.stellarnav.mobile.left .menu-toggle.half,
+.stellarnav.mobile.left .menu-toggle.third,
+.stellarnav.mobile.right .menu-toggle.half,
+.stellarnav.mobile.right .menu-toggle.third {
+    text-align: left;
+}
+
+.stellarnav.mobile.left .close-menu.third span,
+.stellarnav.mobile.right .close-menu.third span {
+    display: none;
+}
+
+/* left and right positions */
+
+/* mega dd */
+.stellarnav.desktop li.mega ul ul {
+    background: none;
+}
+
+.stellarnav.desktop li.mega li {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -4px;
+}
+
+.stellarnav.desktop li.mega li li {
+    display: block;
+    position: relative;
+    left: 4px;
+}
+
+.stellarnav.desktop li.mega ul ul {
+    width: auto;
+}
+
+.stellarnav.desktop > ul > li.mega {
+    position: inherit;
+}
+
+.stellarnav.desktop > ul > li.mega > ul {
+    width: 100%;
+}
+
+.stellarnav.desktop > ul > li.mega > ul li.has-sub ul {
+    display: block;
+    position: relative;
+    left: auto;
+}
+
+.stellarnav.desktop > ul > li.mega > ul > li {
+    padding-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.stellarnav.desktop li.mega li li a {
+    padding: 5px 15px;
+}
+
+.stellarnav.desktop li.mega li.has-sub a:after {
+    display: none;
+}
+
+.stellarnav.desktop > ul > li.mega > ul > li > a {
+    color: black;
+    font-weight: 700;
+    font-size: 22px;
+
+}
+
+/* mega dd */
+
+
+/* Fallback for slow javascript load */
+@media only screen and (max-width : 768px) {
+    .stellarnav {
+        overflow: hidden;
+        display: block;
+    }
+
+    .stellarnav ul {
+        position: relative;
+        display: none;
+    }
+}
+
+/* mobile nav */
+@media only screen and (max-width : 420px) {
+
+    .stellarnav.mobile .call-btn-mobile.third span,
+    .stellarnav.mobile .location-btn-mobile.third span {
+        display: none;
+    }
+}
+
+.main__menu ul li a:hover, 
+.main__menu ul li.current a{
+    color: #ffbb40;
+}
+
+.main__menu ul li.current li a{
+    color: #000
+}
+
+.main__menu ul li{
+    position: relative;
+    z-index: 2;
+}
+
+.main__menu ul li:before{
+    position: absolute;
+    content:"";
+    height: 5px;
+    width: 5px;
+    background: #ffbb40;
+    top: 50%;
+    border-radius: 50%;
+    left: 10px;
+    margin-top: -2.5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+
+}
+.main__menu ul li li:before{
+    left: 7px;
+
+}
+
+
+
+.main__menu ul li:hover:before, 
+.main__menu ul li.current:before{
+    visibility: visible;
+    opacity: 1;
+    transition: all .3s;
+}
+
+ul#newsprk_menu {
+    z-index: 99;
+}
+
+
+.newsprk_nav li {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+}
+
+.newsprk_nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+.newsprk_nav li a {
+    padding: 18px 20px;
+    background: transparent;
+    color: #17222B;
+    position: relative;
+    z-index: 2;
+}
+.theme-4 .newsprk_nav li a:hover{
+    color: #FF5555;
+}
+
+.theme-4 .newsprk_nav li ul{
+    background: #29333C;
+}
+
+.newsprk_nav li a:before{
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #F3F3F4;
+    z-index: -1;
+    transition: all .4s;
+}
+.dark-theme .newsprk_nav li a:before{
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #2E3D4A;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.theme-3 .newsprk_nav li a:before{
+
+    background: #1091FF;
+}
+.theme-3 .newsprk_nav li a:before{
+    background: #1091FF;
+}
+
+
+.newsprk_nav li a:after{
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    background: #1091FF;
+    z-index: -1;
+    transition: all .4s;
+}
+
+
+.theme-4 .newsprk_nav li a:after{
+    background: -webkit-linear-gradient(left, #FF5555, #AB50EF);
+    background: -o-linear-gradient(left, #FF5555, #AB50EF);
+    background: linear-gradient(to right, #FF5555, #AB50EF);
+}
+ 
+
+.newsprk_nav li a:hover:after{
+    width: 100%;
+    transition: all .4s;
+}
+
+.newsprk_nav li a:hover:before{
+    height: 100%;
+    transition: all .4s;
+}
+
+
+.newsprk_nav li a:hover{
+    color: #1091FF;
+}
+
+.dark-theme .newsprk_nav li ul{
+
+    background: #29333C;
+}
+
+
+
+
+.newsprk_nav li ul li a{
+    
+   width: 200px;
+}
+.newsprk_nav li ul li a:before, 
+.newsprk_nav li ul li a:after{
+    display: none;
+}
+.newsprk_nav li li > a{
+    padding: 13px 20px;
+}
+
+
+.newsprk_nav li li > a:Hover{
+  background: #1091FF;
+  color: #fff;
+}
+.dark-theme .newsprk_nav li a{
+    color: #fff;
+}
+
+
+.theme-3 .newsprk_nav li a{
+    color: #fff;
+}
+
+
+.theme-4 .newsprk_nav li a{
+    color: #fff;
+    padding: 23px 20px;
+}
+
+
+.theme-4 .newsprk_nav li ul a{
+    padding: 12px 20px;
+}
+.theme-4 .newsprk_nav li ul a:hover{
+    background: #fff;
+}
+
+
+.theme-4 .main-nav .col-lg-9{
+    padding: 0;
+}
+
+.theme-3 .newsprk_nav li li a{
+    color: #17222B;
+}
+.theme-3 .newsprk_nav li a {
+    padding: 23px 20px;
+}
+.theme-3 .newsprk_nav li li a {
+    padding: 12px 20px;
+}
+.dark-theme .newsprk_nav li li > a:Hover{
+  background: #17222B;
+  color: #fff;
+}
+
+.theme-3 .main-nav .col-4 {
+    padding: 0;
+}
+
+
+.newsprk_nav li ul li a i {
+    float: right;
+}
+
+
+
+
+
+ .newsprk_nav.stellarnav.light.right.mobile {
+    float: left;
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1300px) {
+    .newsprk_nav li a{
+        font-size: 14px;
+    }
+
+}
+
+
+
+.dark-theme .stellarnav.mobile.light ul, 
+.theme-3 .stellarnav.mobile.light ul{
+    background: #1091FF;
+}
+
+.theme-4 .stellarnav.mobile.light ul{
+    background: #29333C;
+}

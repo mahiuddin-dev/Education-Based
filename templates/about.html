@@ -1,0 +1,158 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+<!--::::: INNER TABLE AREA START :::::::-->
+<div class="inner_table shadow5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bridcrumb"><a href="#">Home</a> / About</div>
+      </div>
+    </div>
+    <div class="space-50"></div>
+    <div class="row">
+      <div class="col-12">
+		  {% for about in about %}
+
+        <div class="author_about">
+          <div class="author_img">
+            <div class="author_wrap">
+              <img src="{{ about.image.url }}" alt="" />
+            </div>
+          </div>
+          <div class="author_content">
+            <a href="/">{{ about.company_name }}</a>
+            <ul class="inline">
+              <li>{{ about.oppaning_date }}</li>
+            </ul>
+          </div>
+          <p>
+            {{ about.description|safe }}
+          </p>
+        </div>
+		{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="space-50"></div>
+</div>
+<!--::::: INNER TABLE AREA END :::::::-->
+<!--::::: ARCHIVE AREA START :::::::-->
+<div class="archives padding-top-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-8">
+        <div class="row">
+          <div class="col-10 align-self-center">
+            <div class="about_post_list">
+              <ul class="nav nav-tabs">
+                <li>
+                  <a class="active" data-toggle="tab" href="#latest"
+                    >Latest news</a
+                  >
+                </li>
+                <li><a data-toggle="tab" href="#popular">Popular news</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-2 text-right align-self-center">
+            <div class="calender mb20">
+              <img src="{% static 'assets/img/icon/calendar.png' %}" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="about_posts_tab">
+          <div class="tab-content">
+
+            <div id="latest" class="tab-pane fade show in active">
+              <div class="row justify-content-center">
+                {% for latest in latestpost %}
+                <div class="col-lg-6">
+                  <div class="single_post post_type3 mb30">
+                    <div class="post_img">
+                      <a href="{{ latest.get_absolute_url }}">
+                        <img src="{{ latest.image.url }}" alt="" />
+                      </a>
+                    </div>
+                    <div class="single_post_text">
+                      <div class="meta3">
+                        <a href="{{ latest.category.get_absolute_url }}"
+                          >{{ latest.category }}</a
+                        >
+                        <a href="{{ latest.get_absolute_url }}"
+                          >{{ latest.date|date:"M d, Y" }}</a
+                        >
+                      </div>
+                      <h4>
+                        <a href="{{ latest.get_absolute_url }}"
+                          >{{ latest.title|slice:"0:50"}}...</a
+                        >
+                      </h4>
+                      <div class="space-10"></div>
+                      <p class="post-p">{{ latest.body|safe |slice:"0:120"}}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div id="popular" class="tab-pane fade">
+				<div class="row justify-content-center">
+					{% for latest in PopularPost %}
+					<div class="col-lg-6">
+					  <div class="single_post post_type3 mb30">
+						<div class="post_img">
+						  <a href="{{ latest.get_absolute_url }}">
+							<img src="{{ latest.image.url }}" alt="" />
+						  </a>
+						</div>
+						<div class="single_post_text">
+						  <div class="meta3">
+							<a href="{{ latest.category.get_absolute_url }}"
+							  >{{ latest.category }}</a
+							>
+							<a href="{{ latest.get_absolute_url }}"
+							  >{{ latest.date|date:"M d, Y" }}</a
+							>
+						  </div>
+						  <h4>
+							<a href="{{ latest.get_absolute_url }}"
+							  >{{ latest.title|slice:"0:50"}}...</a
+							>
+						  </h4>
+						  <div class="space-10"></div>
+						  <p class="post-p">{{ latest.body|safe |slice:"0:120"}}</p>
+						</div>
+					  </div>
+					</div>
+					{% endfor %}
+				  </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 col-lg-4">
+		{% include "widget/ReletedWidget.html" %}
+		{% include "widget/FollowUs.html" %}
+		{% include "widget/NewsLetter.html" %}
+		{% include "widget/Categories.html" %}
+		{% include "widget/PopularPosts.html" %}
+		{% include "widget/banner300.html" %}
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: ARCHIVE AREA END :::::::-->
+<!--::::: BANNER AREA START :::::::-->
+<div class="padding5050 fourth_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+        {% include 'widget/bannerAds.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

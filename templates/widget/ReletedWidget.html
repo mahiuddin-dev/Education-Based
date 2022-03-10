@@ -1,0 +1,120 @@
+{% load static %}
+
+    <div class="widget_tab md-mt-30">
+        
+      <ul class="nav nav-tabs">
+        <li>
+          <a class="active uppercase" data-toggle="tab" href="#post1"
+            >Latest</a
+          >
+        </li>
+        <li><a class="uppercase" data-toggle="tab" href="#post2">trending</a></li>
+        <li><a class="uppercase" data-toggle="tab" href="#post3">POPULAR</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="post1" class="tab-pane fade show in active">
+          <div class="widget tab_widgets mb30">
+            
+            {% for LatestPost in Latest %}
+
+            <div class="single_post widgets_small">
+              <div class="post_img">
+                <div class="img_wrap shikbosobbai">
+                  <a href="{{ LatestPost.get_absolute_url }}">
+                    <img
+                      src="{{ LatestPost.image.url }}"
+                      alt="{{ LatestPost.title }}"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div class="single_post_text">
+                <div class="meta2 meta_separator1">
+                  <a style="text-transform: uppercase;" href="{{ LatestPost.category.get_absolute_url }}"> {{ LatestPost.category}} </a>
+                  <a href="{{ LatestPost.get_absolute_url }}">{{ LatestPost.date|date:"M d, Y" }}</a>
+                </div>
+                <h4>
+                  <a href="{{ LatestPost.get_absolute_url }}">
+                    {{ LatestPost.title|slice:"0:40"}}..
+                  </a>
+                </h4>
+              </div>
+            </div>
+
+            <div class="space-15"></div>
+            <div class="border_black"></div>
+            <div class="space-15"></div>
+            {% endfor %}
+
+          </div>
+        </div>
+        <div id="post2" class="tab-pane fade">
+          <div class="widget tab_widgets mb30">
+            {% for TrandingPost in Tranding %}
+            <div class="single_post widgets_small">
+              <div class="post_img">
+                <div class="img_wrap shikbosobbai">
+                  <a href="{{ TrandingPost.get_absolute_url }}">
+                    <img
+                      src="{{ TrandingPost.image.url }}"
+                      alt="{{ TrandingPost.title }}"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div class="single_post_text">
+                <div class="meta2 meta_separator1">
+                  <a style="text-transform: uppercase;" href="{{ TrandingPost.category.get_absolute_url }}">
+                    {{ TrandingPost.category|slice:"0:10" }}
+                  </a>
+                  <a href="{{ TrandingPost.get_absolute_url }}">
+                    {{ TrandingPost.date|date:"M d, Y" }}</a>
+                </div>
+                <h4>
+                  <a href="{{ TrandingPost.get_absolute_url }}"
+                    >{{ TrandingPost.title|slice:"0:40"}}..</a
+                  >
+                </h4>
+              </div>
+            </div>
+            <div class="space-15"></div>
+            <div class="border_black"></div>
+            <div class="space-15"></div>
+            {% endfor %}
+          </div>
+        </div>
+        <div id="post3" class="tab-pane fade">
+          <div class="widget tab_widgets mb30">
+            {% for PopularPost in Popular %}
+            <div class="single_post widgets_small">
+              <div class="post_img">
+                <div class="img_wrap shikbosobbai">
+                  <a href="{{ PopularPost.get_absolute_url }}">
+                    <img
+                      src="{{ PopularPost.image.url }}"
+                      alt="{{ PopularPost.title }}"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div class="single_post_text">
+                <div class="meta2 meta_separator1">
+                  <a style="text-transform: uppercase;" href="{{ PopularPost.category.get_absolute_url }}">{{ PopularPost.category|slice:"0:10" }}</a>
+                  <a href="{{ PopularPost.get_absolute_url }}">{{ PopularPost.date|date:"M d, Y" }}</a>
+                </div>
+                <h4>
+                  <a href="{{ PopularPost.get_absolute_url }}">
+                    {{ PopularPost.title|slice:"0:40"}}..</a
+                  >
+                </h4>
+              </div>
+            </div>
+            <div class="space-15"></div>
+            <div class="border_black"></div>
+            <div class="space-15"></div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  

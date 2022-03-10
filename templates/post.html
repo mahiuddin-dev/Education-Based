@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<style>
+	.single_comment{
+		padding-left: 0px;
+	}
+	@media screen and (min-width: 992px) {
+		.post_img{
+			width: 100%;
+		}
+		.post_img a{
+			width: 100%;
+		}
+		.post_img img {
+		  height: 250px;
+		}
+	  }
+	  @media screen and (min-width: 1400px) {
+		.post_img img {
+		  height: 280px;
+		}
+	  }
+	  @media screen and (min-width: 1600px) {
+		.post_img img {
+		  height: 300px;
+		}
+	  }
+	  @media screen and (min-width: 1900px) {
+		.post_img img {
+		  height: 325px;
+		}
+	  }
+</style>
+{% endblock style %}
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Messege</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<p class="alert alert-{{ message.tags }}"> 
+				{{ message }} </p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  {% endfor %}
+  {% endif %}
+	
+	<!--::::: ARCHIVE AREA START :::::::-->
+	<div class="archives post post1 padding-top-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="bridcrumb">	<a href="/">Home</a> /
+						{% if jobname %}
+						<a href="{% url 'Jobpost:job' %}">All Job</a> 
+						{% else %}
+						<a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a> 
+						{% endif %}
+						/ 
+						{{ post.title }}</div>
+				</div>
+			</div>
+			<div class="space-30"></div>
+			<div class="row">
+				<div class="col-md-6 col-lg-8">
+					<div class="row">
+						<div class="col-4 align-self-center">
+							<div class="page_category">
+								<h4 class="uppercase">{{ post.category }}</h4>
+							</div>
+						</div>
+						<div class="col-8 text-right">
+							<div class="page_comments">
+								<ul class="inline">
+									<li><i class="fas fa-comment"></i>{{ count_comment }}</li>
+									<li><i class="fas fa-fire"></i>{{ post.read | add:"1"}}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="space-30"></div>
+					<div class="single_post_heading">
+						<h1>{{ post.title }}</h1>
+						<div class="space-10"></div>
+					</div>
+					<div class="space-40"></div>
+					<img src="{{ post.image.url }}" alt="image">
+					<div class="space-20"></div>
+
+					<div class="space-20"></div>
+					<p>{{ post.body | safe }}</p>
+					<div class="space-40"></div>
+
+					<div class="tags">
+						<ul class="inline">
+							<li class="tag_list"><i class="fas fa-tag"></i> tags</li>
+							{% for tag in post.tags.all %} 
+							<li><a href="#">{{ tag.name }}</a>
+							</li>
+							{% endfor %}
+							</li>
+						</ul>
+					</div>
+					<div class="space-40"></div>
+					<div class="border_black"></div>
+					<div class="space-40"></div>
+					<div class="next_prev">
+						<div class="row">
+							{% for next_prev in next_prv_single %}
+							<div class="col-lg-6 align-self-center">
+								<div class="next_prv_single border_left3">
+									<p>NEWS</p>
+									<h3><a href="{{ next_prev.get_absolute_url }}">{{ next_prev.title }}</a></h3>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xl-4"> 
+					{% include "widget/ReletedWidget.html" %}
+					{% include "widget/FollowUs.html" %}
+					{% include "widget/NewsLetter.html" %}
+					{% include "widget/PopularPosts.html" %}
+					{% include "widget/upcomming_macth.html" %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--::::: ARCHIVE AREA END :::::::-->
+	<div class="space-60"></div>
+	<!--::::: LATEST BLOG AREA START :::::::-->
+	<div class="fourth_bg padding6030">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="heading">
+						<h2 class="widget-title">Our Latest Blog</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				
+				{% for Latest in Latests %}
+				  
+				<div class="col-md-6 col-lg-4">
+					<div class="single_post post_type3 mb30">
+						<div class="post_img">
+							<a href="{{ Latest.get_absolute_url }}">
+								<img src="{{ Latest.image.url }}" alt="{{ Latest.title }}">
+							</a>
+						</div>
+						<div class="single_post_text">
+							<div class="meta3">	<a href="{{ Latest.category.get_absolute_url }}">{{ Latest.category }}</a>
+								<a href="{{ Latest.get_absolute_url }}">{{ Latest.date }}</a>
+							</div>
+							<h4><a href="{{ Latest.get_absolute_url }}">{{ Latest.title|slice:"0:55" }}</a></h4>
+							<div class="space-10"></div>
+							<p class="post-p">{{ Latest.body|safe |slice:"0:125" }}</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!--::::: LATEST BLOG AREA END :::::::-->
+	<div class="space-60"></div>
+	<!--:::::  COMMENT FORM AREA START :::::::-->
+	<div class="comment_form">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-10 m-auto">
+					<form action="" method='post'>
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-6">
+								<input name="name" type="text" placeholder="Full name" required>
+							</div>
+							<div class="col-md-6">
+								<input name="email" type="text" placeholder="Email address" required>
+							</div>
+							<div class="col-12">
+								<textarea name="body" id="messege" cols="30" rows="5" placeholder="Tell us about your opinion…"></textarea required>
+							</div>
+							<div class="col-12">
+								<button class="cbtn2" type="submit">POST OPINION</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="space-60"></div>
+			<div class="comment_list">
+				<div class="row">
+					<div class="col-12 col-lg-10 m-auto">
+						<h3>latest Comments</h3>
+						{% for comment in comments %}
+						<div class="single_comment">
+							<div class="col-sm-6" style="padding-left: 0px;">	
+								<a href="#">{{ comment.name }}</a>
+							</div>
+		
+							<div class="space-5"></div>
+							<p>{{ comment.body }}</p>
+						</div>
+						<div class="space-15"></div>
+						<div class="border_black"></div>
+						<div class="space-15"></div>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="space-100"></div>
+	<!--:::::  COMMENT FORM AREA END :::::::-->
+	<!--::::: BANNER AREA START :::::::-->
+	<div class="padding5050 fourth_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 m-auto">
+					{% include 'widget/bannerAds.html' %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--::::: BANNER AREA END :::::::-->
+{% endblock body %}
+
+{% if messages %}
+{% block script %}
+<script>
+	$('#myModal').modal('show')
+</script>
+{% endblock script %}
+{% endif %}

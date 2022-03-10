@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+	<!--::::: INNER TABLE AREA START :::::::-->
+	<div class="inner_table">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="space-50"></div>
+					<div class="area404 text-center">
+						<img src="{% static 'assets/img/bg/404.png' %}" alt="">
+					</div>
+					<div class="space-30"></div>
+					<div class="back4040 text-center col-lg-6 m-auto">
+						<h3>Page not faund</h3>
+						<div class="space-10"></div>
+						<p>Sorry the page you were looking for cannot be found. Try searching for the best match or browse the links below:</p>
+						<div class="space-20"></div>
+						<div class="button_group">	<a href="/" class="cbtn2">GO TO HOME</a>
+							<a href="{% url 'Contact:contact' %}" class="cbtn3">contact us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="space-50"></div>
+	</div>
+	<!--::::: INNER TABLE AREA END :::::::-->
+
+	<!--::::: BANNER AREA START :::::::-->
+	<div class="padding5050 fourth_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 m-auto">
+					{% include 'widget/bannerAds.html' %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--::::: BANNER AREA END :::::::-->
+	{% endblock body %}

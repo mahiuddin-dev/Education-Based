@@ -1,0 +1,57 @@
+<div class="popular_carousel_area mb30 md-mt-30">
+    <h2 class="widget-title">Popular Posts</h2>
+    <div class="popular_carousel owl-carousel nav_style1">
+      <!--CAROUSEL START-->
+      <div class="popular_items">
+        {% for PopularPost in Tranding %}
+        <div class="single_post type10 widgets_small mb15">
+          <div class="post_img">
+            <div class="img_wrap shikbosobbai">
+              <a href="{{ PopularPost.get_absolute_url }}">
+                <img
+                  src="{{ PopularPost.image.url }}"
+                  alt="{{ PopularPost.title }}"
+                />
+              </a>
+            </div>
+            <span class="tranding tranding_border"> {{ forloop.counter }} </span>
+          </div>
+          <div class="single_post_text">
+            <h4>
+              <a href="{{ PopularPost.get_absolute_url }}">
+                {{ PopularPost.title | slice:"0:40"}}..</a>
+            </h4>
+            <div class="meta4"><a style="text-transform: uppercase;" href="{{ PopularPost.category.get_absolute_url }}">{{ PopularPost.category }}</a></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="popular_items">
+
+        {% for TrandingPost in Popular %}
+        <div class="single_post type10 widgets_small mb15">
+          <div class="post_img">
+            <div class="img_wrap shikbosobbai">
+              <a href="{{ TrandingPost.get_absolute_url }}">
+                <img
+                  src="{{ TrandingPost.image.url }}"
+                  alt="{{ TrandingPost.title }}"
+                />
+              </a>
+            </div>
+            <span class="tranding tranding_border"> {{ forloop.counter }} </span>
+          </div>
+          <div class="single_post_text">
+            <h4>
+              <a href="{{ TrandingPost.get_absolute_url }}">
+                {{ TrandingPost.title | slice:"0:40"}}..</a>
+            </h4>
+            <div class="meta4"><a style="text-transform: uppercase;" href="{{ TrandingPost.category.get_absolute_url }}">{{ TrandingPost.category }}</a></div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+    <!--CAROUSEL END-->
+  </div>
