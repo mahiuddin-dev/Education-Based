@@ -71,8 +71,8 @@
         <div class="row">
           <div class="col-8 text-center m-auto">
             <div class="v1search_form">
-              <form action="#">
-                <input type="search" placeholder="Search Here..." />
+              <form  method="get" action="{% url 'Home:search' %}">
+                <input name="q" id="query" type="search" placeholder="Search Here..."/>
                 <button type="submit" class="cbtn1">Search</button>
               </form>
             </div>
@@ -150,7 +150,7 @@
             
             <div class="banner1">
               <a href="#">
-                <img src="{% static 'assets/img/bg/banner1.png' %}" alt="" />
+                <img src="" alt="" />
               </a>
             </div>
 

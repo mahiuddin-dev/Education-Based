@@ -11,7 +11,7 @@ class Blog_Post(models.Model):
     body = models.TextField()
     tags = TaggableManager()
     date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='blog/', blank=True, null=True, default='default.jpg')
+    image = models.ImageField(upload_to='blog/', blank=True, null=True,)
     slug = models.SlugField(unique=True)
     read = models.IntegerField(default=0)
     tranding = models.IntegerField(default=0)

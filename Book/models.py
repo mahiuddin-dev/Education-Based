@@ -9,7 +9,7 @@ class Book_Post(models.Model):
     body = models.TextField()
     tags = TaggableManager()
     date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='book/image', blank=True, null=True, default='default.jpg')
+    image = models.ImageField(upload_to='book/image', blank=True, null=True)
     file = models.FileField(upload_to='book/file', blank=True, null=True)
     slug = models.SlugField(unique=True)
     read = models.IntegerField(default=0)

@@ -1,7 +1,8 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
 from decouple import config
-
+import django_heroku
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Site map
+    'django.contrib.sitemaps',
+    
     # Install packages
     'taggit',
     'mptt',
@@ -149,3 +153,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+django_heroku.settings(locals())

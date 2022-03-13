@@ -1,8 +1,10 @@
-from unicodedata import category
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from Blog.models import Blog_Post
+from Book.models import Book_Post
+from Jobpost.models import Job_Post
 from itertools import chain
-
+from django.db.models import Q
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -32,3 +34,18 @@ class HomeView(TemplateView):
         context['blogs'] = Blog_Post.objects.all().order_by('title')[:7]
         return context
     
+
+def Search(request):
+    query = request.GET.get('q')
+    if len(query) > 0:
+        lookups = Q(title__icontains=query) | Q(body__icontains=query)
+        Blogpost = Blog_Post.objects.filter(lookups)
+        Bookpost = Book_Post.objects.filter(lookups)
+        Jobpost = Job_Post.objects.filter(lookups)
+        results = list(chain(Blogpost, Bookpost,Jobpost))
+        context = {'results':results,'queryset':len(results)}
+        return render(request,'search.html',context)
+    else:
+        context = {'queryset':0}
+        return render(request,'search.html',context)
+

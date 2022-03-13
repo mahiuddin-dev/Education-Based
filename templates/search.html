@@ -1,0 +1,151 @@
+{% extends "base.html" %} 
+{% block style %}
+<style>
+  @media screen and (min-width: 992px) {
+    .post_img img {
+      height: 250px;
+    }
+  }
+  @media screen and (min-width: 1400px) {
+    .post_img img {
+      height: 280px;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .post_img img {
+      height: 300px;
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .post_img img {
+      height: 325px;
+    }
+  }
+</style>
+{% endblock style %} 
+{% load static %} 
+{% block body %}
+<!--::::: INNER TABLE AREA START :::::::-->
+<div class="inner_table">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="bridcrumb"><a href="/">Home</a> / Search results </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: INNER TABLE AREA END :::::::-->
+
+<!--::::: ARCHIVE AREA START :::::::-->
+<div class="archives padding-top-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-8">
+        <div class="row justify-content-center">
+        {% if queryset %}
+
+          {% for post in results %}
+          <div class="col-lg-6">
+            <div class="single_post post_type3 mb30">
+              <div class="post_img">
+                <div class="img_wrap">
+                  <img src="{{ post.image.url }}" alt="" />
+                </div>
+              </div>
+              <div class="single_post_text">
+                <div class="meta3">
+                  <a href="{{ post.get_absolute_url }}">{{ post.date }}</a>
+                </div>
+                <h4>
+                  <a href="{{ post.get_absolute_url }}"
+                    >{{ post.title | slice:":70" }}..</a
+                  >
+                </h4>
+                <div class="space-10"></div>
+                <p class="post-p">{{ post.body|safe |slice:"0:125"}}...</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          <h1 align="center">No Results found!</h1>
+          {% endif %}
+        </div>
+        
+ 
+        <div class="row">
+          <div class="col-12">
+            {% if queryset %}
+            <div class="cpagination padding5050">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  {% if results.has_previous %}
+                    <a href="d"></a>
+                  {% endif %} 
+				  {% load l10n %} 
+				  {% for service in results.paginator.page_range %} 
+				  {% if results.number == service %}
+                  <li class="page-item active">
+                    <a class="page-link" href="?page={{ service }}"
+                      >{{ service | localize }}</a
+                    >
+                  </li>
+                  {% else %}
+
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ service }}"
+                      >{{ service }}</a
+                    >
+                  </li>
+                  {% endif %} 
+				  {% endfor %} 
+				  {% if results.has_next %}
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      href="?page={{ results.next_page_number }}"
+                      aria-label="Next"
+                    >
+                      <span aria-hidden="true"
+                        ><i class="fas fa-caret-right"></i
+                      ></span>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <!-- widget area  -->
+		  {% include "widget/ReletedWidget.html" %}
+          {% include "widget/NewsLetter.html" %}
+          {% include "widget/FollowUs.html" %}
+          {% include "widget/PopularPosts.html" %}
+          {% include "widget/upcomming_macth.html" %}
+          {% include "widget/banner300.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: ARCHIVE AREA END :::::::-->
+
+<!--::::: BANNER AREA START :::::::-->
+<div class="padding5050 fourth_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">
+
+        {% include "widget/bannerAds.html" %}
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: BANNER AREA END :::::::-->
+{% endblock body %}
