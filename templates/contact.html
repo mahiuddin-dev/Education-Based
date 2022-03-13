@@ -1,133 +1,162 @@
-{% extends "base.html" %}
-{% block title %}Contact{% endblock title %}
-{% load static %}
-
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Contact{% endblock title %} 
 {% block body %}
 
 <!-- Button trigger modal -->
 
-{% if messages %}
+{% if messages %} 
 {% for message in messages %}
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title" id="exampleModalLabel">Messege</h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="modal-body">
-			<p class="alert alert-{{ message.tags }}"> 
-				{{ message }} </p>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  
-		</div>
-	  </div>
-	</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Messege</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
-  
-  {% endfor %}
-  {% endif %}
-	<!--::::: INNER AREA START :::::::-->
-	<div class="inner inner_bg inner_overlay">
-		<div class="container">
-			<div class="inner_wrap">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="title_inner">
-							<h6>CONTACT US</h6>
-							<h1>let's Contact</h1>
-						</div>
-					</div>
-				</div>
-				<div class="inner_scroll">
-					<a href="#inner">
-						<img src="{% static 'assets/img/icon/scroll.png' %}" alt="">
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--::::: INNER AREA END :::::::-->
+</div>
 
-	<!--::::: CONTACT FORM AREA START :::::::-->
-	<div class="contact_form padding-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="map">
-					<!--	<img src="{% static 'assets/img/bg/map.jpg' %}" alt=""> -->
-					</div>
-				</div>
-			</div>
-			<div class="space-50"></div>
-			<div class="row">
-				<div class="col-md-8">
-					<div class="cotact_form">
-						<div class="row">
-							<div class="col-12">
-								<h3>Let’s work together! <br> Fill out the form.</h3>
-							</div>
-							<div class="col-12">
-								<form action="{% url 'Contact:contact' %}" method="post">
-									{% csrf_token %}
-									<div class="row">
-										<div class="col-lg-6">
-											<input name="name" type="text" placeholder="Full Name" required>
-										</div>
-										<div class="col-lg-6">
-											<input name="subject" type="text" placeholder="Subject" required>
-										</div>
-										<div class="col-lg-6">
-											<input name="email" type="email" placeholder="Email Adress" required>
-										</div>
-										<div class="col-lg-6">
-											<input name="phone" type="text" placeholder="Phone Number">
-										</div>
-										<div class="col-12">
-											<textarea required name="message" id="messege" cols="30" rows="5" placeholder="Tell us about your message…"></textarea>
-										</div>
-										<div class="col-12">
-											<div class="space-20"></div>
-											<button class="cbtn1" type="submit">Sent Messege</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					
-					{% include "widget/FollowUs.html" %}
-					{% include "widget/NewsLetter.html" %}
+{% endfor %}
+{% endif %}
+<!--::::: INNER AREA START :::::::-->
+<div class="inner inner_bg inner_overlay">
+  <div class="container">
+    <div class="inner_wrap">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="title_inner">
+            <h6>CONTACT US</h6>
+            <h1>let's Contact</h1>
+          </div>
+        </div>
+      </div>
+      <div class="inner_scroll">
+        <a href="#inner">
+          <img src="{% static 'assets/img/icon/scroll.png' %}" alt="" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: INNER AREA END :::::::-->
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--::::: CONTACT FORM AREA END :::::::-->
-	<!--::::: BANNER AREA START :::::::-->
-	<div class="padding5050">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 m-auto">
-					{% include "widget/bannerAds.html" %}
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--::::: BANNER AREA END :::::::-->
-{% endblock body %}
+<!--::::: CONTACT FORM AREA START :::::::-->
+<div class="contact_form padding-bottom">
+  <div class="container">
+    <div class="space-50"></div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="cotact_form">
+          <div class="row">
+            <div class="col-12">
+              <h3>
+                Let’s work together! <br />
+                Fill out the form.
+              </h3>
+            </div>
+            <div class="col-12">
+              <form action="{% url 'Contact:contact' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-6">
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="Full Name"
+                      required
+                    />
+                  </div>
+                  <div class="col-lg-6">
+                    <input
+                      name="subject"
+                      type="text"
+                      placeholder="Subject"
+                      required
+                    />
+                  </div>
+                  <div class="col-lg-6">
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="Email Adress"
+                      required
+                    />
+                  </div>
+                  <div class="col-lg-6">
+                    <input
+                      name="phone"
+                      type="text"
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <textarea
+                      required
+                      name="message"
+                      id="messege"
+                      cols="30"
+                      rows="5"
+                      placeholder="Tell us about your message…"
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="space-20"></div>
+                    <button class="cbtn1" type="submit">Sent Messege</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        {% include "widget/FollowUs.html" %} 
+		{% include "widget/NewsLetter.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--::::: CONTACT FORM AREA END :::::::-->
+<!--::::: BANNER AREA START :::::::-->
+<div class="padding5050">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 m-auto">{% include "widget/bannerAds.html" %}</div>
+    </div>
+  </div>
+</div>
+<!--::::: BANNER AREA END :::::::-->
+{% endblock body %} 
 
-{% if messages %}
+{% if messages %} 
 {% block script %}
 <script>
-	$('#myModal').modal('show')
+  $("#myModal").modal("show");
 </script>
-{% endblock script %}
+{% endblock script %} 
 {% endif %}

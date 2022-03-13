@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}jobs Post{% endblock title %}
+{% block title %}{% if bookpage %}Books{% else %}Jobs Post {% endif %}{% endblock title %}
 {% block style %}
 <style>
   @media screen and (min-width: 992px) {
