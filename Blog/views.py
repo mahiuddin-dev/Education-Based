@@ -4,8 +4,9 @@ from .forms import CommentForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect,render
 from django.contrib import messages
-from datetime import datetime,timedelta
-from dateutil import tz
+from datetime import datetime,timedelta,timezone
+
+
 # Create your views here.
 
 class BlogView(ListView):
@@ -56,11 +57,7 @@ class BlogDetailView(DetailView):
         get_current_obj.read +=1
         get_current_obj.save(update_fields = ['read'])
 
-        utc = tz.tzutc()
-        local = tz.tzlocal()
-        utc_now = datetime.utcnow()
-        utc_now = utc_now.replace(tzinfo=utc)
-        local_now = utc_now.astimezone(local)
+        local_now = datetime.now(timezone.utc)
 
         date = get_current_obj.tranding_date
         check_tranding = date+ timedelta(days=7)
