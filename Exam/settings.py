@@ -1,7 +1,7 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
 from decouple import config
-# import django_heroku
+import django_heroku
 import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -154,4 +154,4 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
